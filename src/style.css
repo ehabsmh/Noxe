@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;200;300;400;600;800&display=swap");
+body {
+  font-family: "Montserrat Alternates", sans-serif;
+  background-color: #131722;
+  color: #fff;
+}
+
+a,
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-item i {
+  cursor: pointer;
+}
+
+.navbar {
+  box-shadow: 1px 1px 1px 1px rgba(32, 39, 58, 0.2470588235);
+}
+
+.form-box {
+  background: linear-gradient(to bottom left, rgba(4, 11, 17, 0.9529411765), rgba(2, 58, 100, 0.9529411765));
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+}
+
+.logout-btn {
+  cursor: pointer;
+}
+
+.container-custom {
+  width: 90%;
+  margin: auto;
+}
+
+.movies-title {
+  position: relative;
+}
+.movies-title::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 50%;
+  top: -10px;
+  background-color: rgba(168, 168, 168, 0.2392156863);
+}
+.movies-title::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 150%;
+  bottom: -10px;
+  background-color: rgba(168, 168, 168, 0.2392156863);
+}
+
+.null-img {
+  min-height: 398px;
+}
+
+.cover-image {
+  position: relative;
+}
+.cover-image::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 30%;
+  background: linear-gradient(to bottom, rgba(30, 31, 33, 0) 0%, rgba(53, 53, 53, 0.8) 40%, rgb(8, 8, 8) 100%);
+}
+.cover-image .backdrop {
+  max-height: 70vh;
+}
+
+.movie-details {
+  position: absolute;
+  bottom: 0;
+}
+.movie-details .poster-path {
+  max-height: 320px;
+}
+
+.favorite {
+  padding: 10px;
+}
+.favorite i {
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.5rem;
+}
+.favorite i:hover {
+  color: gold;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .movie {
+    width: 80%;
+  }
+  .cover-image {
+    position: relative;
+  }
+  .cover-image::before {
+    content: "";
+    position: static;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(to bottom, rgba(30, 31, 33, 0) 0%, rgba(53, 53, 53, 0.8) 40%, rgb(8, 8, 8) 100%);
+  }
+  .cover-image .backdrop {
+    max-height: 20vh;
+  }
+  .movie-details {
+    position: static;
+    width: 100%;
+    height: 100%;
+  }
+  .movie-details .poster-path {
+    display: none;
+  }
+  .movie-details .movie-desc p {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 540px) {
+  .search_input--container {
+    width: 80% !important;
+    margin-inline: auto !important;
+  }
+}/*# sourceMappingURL=style.css.map */

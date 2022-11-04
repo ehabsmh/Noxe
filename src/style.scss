@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;200;300;400;600;800&display=swap");
+
+$bgColor: #131722;
+$lightBgColor: #24baef;
+$bgTransparent: rgba(36, 186, 239, 0.6);
+$fontColor: #fff;
+$borderColor: #a8a8a83d;
+$borderHeight: 1px;
+$secondFontColor: #949cb0;
+
+body {
+  font-family: "Montserrat Alternates", sans-serif;
+  background-color: $bgColor;
+  color: $fontColor;
+}
+
+a,
+a:hover {
+  color: $fontColor;
+  text-decoration: none;
+}
+
+.nav-item {
+  i {
+    cursor: pointer;
+  }
+}
+
+.navbar {
+  box-shadow: 1px 1px 1px 1px #20273a3f;
+}
+
+.form-box {
+  background: linear-gradient(to bottom left, #040b11f3, #023a64f3);
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+}
+.logout-btn {
+  cursor: pointer;
+}
+.container-custom {
+  width: 90%;
+  margin: auto;
+}
+
+// home component
+
+.movies-title {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 50%;
+    top: -10px;
+    background-color: $borderColor;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 150%;
+    bottom: -10px;
+    background-color: $borderColor;
+  }
+}
+.null-img {
+  min-height: 398px;
+}
+
+.cover-image {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 30%;
+    background: linear-gradient(
+      to bottom,
+      rgba(30, 31, 33, 0) 0%,
+      rgba(53, 53, 53, 0.8) 40%,
+      rgb(8, 8, 8) 100%
+    );
+  }
+  .backdrop {
+    max-height: 70vh;
+  }
+}
+.movie-details {
+  position: absolute;
+  bottom: 0;
+  .poster-path {
+    max-height: 320px;
+  }
+}
+.favorite {
+  padding: 10px;
+  i {
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.5rem;
+    &:hover {
+      color: gold;
+    }
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .movie {
+    width: 80%;
+  }
+  .cover-image {
+    position: relative;
+    &::before {
+      content: "";
+      position: static;
+      width: 100%;
+      height: auto;
+      background: linear-gradient(
+        to bottom,
+        rgba(30, 31, 33, 0) 0%,
+        rgba(53, 53, 53, 0.8) 40%,
+        rgb(8, 8, 8) 100%
+      );
+    }
+    .backdrop {
+      max-height: 20vh;
+    }
+  }
+  .movie-details {
+    position: static;
+    width: 100%;
+    height: 100%;
+    .poster-path {
+      display: none;
+    }
+    .movie-desc {
+      p {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .search_input--container {
+    width: 80% !important;
+    margin-inline: auto !important;
+  }
+}
