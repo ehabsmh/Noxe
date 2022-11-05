@@ -52,14 +52,20 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
   }, []);
 
   // For Movies and Tv_series Component
-
-  const btnPrev = useRef<HTMLLIElement>(null);
-  const btnNext = useRef<HTMLLIElement>(null);
   const [allMovies, setAllMovies] = useState<MovModel[]>([]);
   const [allTv, setAllTv] = useState<MovModel[]>([]);
+
   let [matchUser, setMatchUser] = useState<MovModel[]>([]);
+
+  // the final result when the user searches
   let [searchResult, setSearchResult] = useState<MovModel[]>([]);
+
+  // a state of the current page
   let [currPage, setCurrPage] = useState(1);
+
+  // Buttons
+  const btnPrev = useRef<HTMLLIElement>(null);
+  const btnNext = useRef<HTMLLIElement>(null);
 
   const getData = async function (
     currPage: number,
@@ -73,31 +79,24 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
     setCurrPage(currPage);
   };
 
-  useEffect(() => {
-    getData(currPage, setAllMovies, "movie");
-    getData(currPage, setAllTv, "tv");
-  }, []);
-
   const checkPagination = function () {
-    if (currPage > 1) {
-      btnPrev.current?.classList.remove("disabled");
-    } else {
-      btnPrev.current?.classList.add("disabled");
-    }
+    if (currPage > 1) btnPrev.current?.classList.remove("disabled");
+    else btnPrev.current?.classList.add("disabled");
 
-    if (currPage === 500) {
-      btnNext.current?.classList.add("disabled");
-    } else {
-      btnNext.current?.classList.remove("disabled");
-    }
+    if (currPage === 500) btnNext.current?.classList.add("disabled");
+    else btnNext.current?.classList.remove("disabled");
   };
+
   useEffect(() => {
     checkPagination();
   }, [currPage]);
 
   const searchInput = useRef<HTMLInputElement>(null);
 
-  const search = async function (userEntry: string | undefined, type: string) {
+  const userSearch = async function (
+    userEntry: string | undefined,
+    type: string
+  ) {
     if (userEntry) {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/search/${type}?api_key=f1aca93e54807386df3f6972a5c33b50&query=${userEntry}`
@@ -105,6 +104,7 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
       setMatchUser(data.results);
 
       const showType = type === "movie" ? "title" : "name";
+
       const userSearchResult = matchUser.filter(
         (mov) =>
           mov[showType]?.toLowerCase().includes(userEntry.toLowerCase()) &&
@@ -156,6 +156,7 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
   // navbar ref for observing
   const navbarRef = useRef(null);
 
+  // sidebarRef
   const toggler = useRef<HTMLElement | any>(null);
 
   const navIntersector = (entries: any) => {
@@ -185,7 +186,7 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
         searchResult,
         currPage,
         searchInput,
-        search,
+        userSearch,
         getGenres,
         getCategories,
         getData,

@@ -19,7 +19,7 @@ const Login: React.FC<Props> = ({ saveUserData }) => {
   });
 
   // email address is not exist msg .
-  const [error, setError] = useState<string>("");
+  const [emailExistenceMsg, setEmailExistenceMsg] = useState<string>("");
 
   // loading icon .
   const [loading, isLoading] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const Login: React.FC<Props> = ({ saveUserData }) => {
   const navigate = useNavigate();
 
   // This function to collect the object from the input value .
-  const createUser = function (e: React.ChangeEvent<HTMLInputElement>): void {
+  const userCreator = function (e: React.ChangeEvent<HTMLInputElement>): void {
     const newUser: any = { ...user };
     newUser[e.target.name] = e.target.value;
     setUser(newUser);
@@ -59,7 +59,7 @@ const Login: React.FC<Props> = ({ saveUserData }) => {
     } else {
       isLoading(false);
       const { message } = data;
-      setError(message);
+      setEmailExistenceMsg(message);
     }
   };
 
@@ -72,13 +72,13 @@ const Login: React.FC<Props> = ({ saveUserData }) => {
     <section className="p-1">
       <h2 className="mt-5 mb-5 w-75 m-auto">Login Now!</h2>
       <form onSubmit={sendUserData} className=" form-box p-4 w-75 m-auto">
-        <p className="text-center text-danger">{error}</p>
+        <p className="text-center text-danger">{emailExistenceMsg}</p>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
             Email Address
           </label>
           <input
-            onChange={createUser}
+            onChange={userCreator}
             type="email"
             className="form-control"
             id="email"
@@ -90,7 +90,7 @@ const Login: React.FC<Props> = ({ saveUserData }) => {
             Password
           </label>
           <input
-            onChange={createUser}
+            onChange={userCreator}
             type="password"
             className="form-control"
             id="password"

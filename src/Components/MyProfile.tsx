@@ -6,7 +6,7 @@ interface Props {
   userData: any;
 }
 
-const My_Profile: React.FC<Props> = ({ userData }) => {
+const MyProfile: React.FC<Props> = ({ userData }) => {
   const context = useContext(NoxeContext);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const My_Profile: React.FC<Props> = ({ userData }) => {
     </main>
   );
 };
-export default My_Profile;
+export default MyProfile;

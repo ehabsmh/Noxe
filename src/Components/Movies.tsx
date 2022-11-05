@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import Movies_Sidebar from "./Sidebar/Movies_Sidebar";
 import { NoxeContext } from "./Context/Store";
+import MoviesSidebar from "./Sidebar/MoviesSidebar";
 
 interface MovModel {
   id: string;
@@ -31,11 +31,12 @@ const Movies = () => {
       context.setFavoriteList(
         JSON.parse(localStorage.getItem("bookMarkList") as string)
       );
+    context.getData(context.currPage, context.setAllMovies, "movie");
   }, []);
 
   return (
     <>
-      <Movies_Sidebar
+      <MoviesSidebar
         getMovieGenres={context.getGenres}
         getMovieCategories={context.getCategories}
       />
@@ -46,7 +47,7 @@ const Movies = () => {
               type="search"
               ref={context.searchInput}
               onChange={() => {
-                context.search(context.searchInput.current?.value, "movie");
+                context.userSearch(context.searchInput.current?.value, "movie");
               }}
               className="form-control "
               id="exampleFormControlInput1"
@@ -95,7 +96,7 @@ const Movies = () => {
                   <div key={i} className="movie col-md-2">
                     <div className="position-relative">
                       <div
-                        className="favorite position-absolute start-0 bottom-0 bg-dark d-flex justify-content-center align-items-center"
+                        className="bookmark position-absolute start-0 bottom-0 bg-dark d-flex justify-content-center align-items-center"
                         onClick={(e: any) => {
                           if (e.target.classList.contains("fa-bookmark")) {
                             e.target.classList.replace(

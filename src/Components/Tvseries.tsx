@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Tv_Sidebar from "./Sidebar/Tv_Sidebar";
 import { NoxeContext } from "./Context/Store";
+import TvSidebar from "./Sidebar/TvSidebar";
 
 interface MovModel {
   id: string;
@@ -15,12 +15,16 @@ interface MovModel {
   genres: string;
 }
 
-export default function Tv_series() {
+export default function TvSeries() {
   const context = useContext(NoxeContext);
+
+  useEffect(() => {
+    context.getData(context.currPage, context.setAllTv, "tv");
+  }, []);
 
   return (
     <>
-      <Tv_Sidebar
+      <TvSidebar
         getTvGenres={context.getGenres}
         getTvCategories={context.getCategories}
       />
@@ -31,7 +35,7 @@ export default function Tv_series() {
               type="search"
               ref={context.searchInput}
               onInput={() => {
-                context.search(context.searchInput.current?.value, "tv");
+                context.userSearch(context.searchInput.current?.value, "tv");
               }}
               className="form-control test"
               id="exampleFormControlInput1"

@@ -22,7 +22,7 @@ export default function Home() {
     useContext(NoxeContext);
 
   return (
-    <main>
+    <main id="home">
       <div className="container-custom">
         <div className="row justify-content-center gy-5">
           <div className="col-md-4 d-flex align-items-center">

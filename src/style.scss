@@ -14,21 +14,25 @@ body {
   color: $fontColor;
 }
 
+i {
+  cursor: pointer;
+}
+
 a,
 a:hover {
   color: $fontColor;
   text-decoration: none;
 }
 
-.nav-item {
-  i {
+// navbar Component
+.navbar {
+  box-shadow: 2px 2px 2px 2px #20273a3f;
+  .logout-btn {
     cursor: pointer;
   }
 }
 
-.navbar {
-  box-shadow: 1px 1px 1px 1px #20273a3f;
-}
+// Register Component
 
 .form-box {
   background: linear-gradient(to bottom left, #040b11f3, #023a64f3);
@@ -37,67 +41,76 @@ a:hover {
   border-radius: 10px;
   background-repeat: no-repeat;
 }
-.logout-btn {
-  cursor: pointer;
-}
 .container-custom {
   width: 90%;
   margin: auto;
 }
 
 // home component
+#home {
+  .movies-title {
+    position: relative;
 
-.movies-title {
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    height: 1px;
-    width: 50%;
-    top: -10px;
-    background-color: $borderColor;
+    &::before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 50%;
+      top: -10px;
+      background-color: $borderColor;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 150%;
+      bottom: -10px;
+      background-color: $borderColor;
+    }
   }
-  &::after {
-    content: "";
-    position: absolute;
-    height: 1px;
-    width: 150%;
-    bottom: -10px;
-    background-color: $borderColor;
+
+  .null-img {
+    min-height: 398px;
   }
 }
-.null-img {
-  min-height: 398px;
-}
 
-.cover-image {
-  position: relative;
-  &::before {
-    content: "";
+// MovieDetails Component
+#movieDetails {
+  .cover-image {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 60%;
+      background: linear-gradient(
+        to bottom,
+        rgba(20, 20, 20, 0) 0%,
+        rgba(20, 20, 20, 0.5) 30%,
+        rgb(20, 20, 20, 0.7) 70%,
+        rgb(20, 20, 20, 0.8) 80%,
+        rgb(20, 20, 20, 0.9) 100%
+      );
+    }
+    .backdrop {
+      max-height: 70vh;
+    }
+  }
+  .movie-details {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    top: 30%;
-    background: linear-gradient(
-      to bottom,
-      rgba(30, 31, 33, 0) 0%,
-      rgba(53, 53, 53, 0.8) 40%,
-      rgb(8, 8, 8) 100%
-    );
-  }
-  .backdrop {
-    max-height: 70vh;
+    .poster-path {
+      max-height: 320px;
+    }
   }
 }
-.movie-details {
-  position: absolute;
-  bottom: 0;
-  .poster-path {
-    max-height: 320px;
-  }
-}
-.favorite {
+
+// bookmark icon in the movie Component .
+.bookmark {
   padding: 10px;
   i {
     cursor: pointer;
@@ -117,37 +130,48 @@ a:hover {
   .movie {
     width: 80%;
   }
-  .cover-image {
-    position: relative;
-    &::before {
-      content: "";
+  #movieDetails {
+    .cover-image {
+      position: relative;
+      &::before {
+        content: "";
+        position: static;
+        width: 100%;
+        height: auto;
+        background: linear-gradient(
+          to bottom,
+          rgba(30, 31, 33, 0) 0%,
+          rgba(53, 53, 53, 0.8) 40%,
+          rgb(8, 8, 8) 100%
+        );
+      }
+      .backdrop {
+        max-height: 20vh;
+      }
+    }
+    .movie-details {
       position: static;
       width: 100%;
-      height: auto;
-      background: linear-gradient(
-        to bottom,
-        rgba(30, 31, 33, 0) 0%,
-        rgba(53, 53, 53, 0.8) 40%,
-        rgb(8, 8, 8) 100%
-      );
-    }
-    .backdrop {
-      max-height: 20vh;
-    }
-  }
-  .movie-details {
-    position: static;
-    width: 100%;
-    height: 100%;
-    .poster-path {
-      display: none;
+      height: 100%;
+      .poster-path {
+        display: none;
+      }
     }
     .movie-desc {
+      h3 {
+        margin-top: 1.4rem;
+        margin-bottom: 1.4rem;
+      }
       p {
         width: 100% !important;
+        margin-top: 1rem;
       }
     }
   }
+}
+
+.box-icon i {
+  font-size: 10rem;
 }
 
 @media screen and (max-width: 540px) {

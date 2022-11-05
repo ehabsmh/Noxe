@@ -13,7 +13,7 @@ interface TvDetail {
   genres: string | any;
 }
 
-export default function Tv_details() {
+export default function TvDetails() {
   // a param that getting the id url after the component url .
   const params = useParams();
 

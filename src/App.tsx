@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Movies from "./Components/Movies";
-import Tv_series from "./Components/Tv_series";
 import Motd from "./Components/Motd";
 import About from "./Components/About";
 import Networks from "./Components/Networks";
@@ -10,10 +9,11 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import { useNavigate, Navigate, Route, Routes } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import Movie_details from "./Components/Movie_details";
-import Tv_details from "./Components/Tv_details";
+import TvDetails from "./Components/TvDetails";
 import { NoxeContextProvider } from "./Components/Context/Store";
-import My_Profile from "./Components/My_Profile";
+import MovieDetails from "./Components/MovieDetails";
+import MyProfile from "./Components/MyProfile";
+import TvSeries from "./Components/Tvseries";
 
 interface Props {
   children: JSX.Element;
@@ -81,7 +81,7 @@ export default function App() {
             path="movie-details"
             element={
               <RouterGuard>
-                <Movie_details />
+                <MovieDetails />
               </RouterGuard>
             }
           >
@@ -89,7 +89,7 @@ export default function App() {
               path=":id"
               element={
                 <RouterGuard>
-                  <Movie_details />
+                  <MovieDetails />
                 </RouterGuard>
               }
             />
@@ -99,7 +99,7 @@ export default function App() {
             path="tv-details"
             element={
               <RouterGuard>
-                <Tv_details />
+                <TvDetails />
               </RouterGuard>
             }
           >
@@ -107,7 +107,7 @@ export default function App() {
               path=":id"
               element={
                 <RouterGuard>
-                  <Tv_details />
+                  <TvDetails />
                 </RouterGuard>
               }
             />
@@ -117,7 +117,7 @@ export default function App() {
             path="/tvseries"
             element={
               <RouterGuard>
-                <Tv_series />
+                <TvSeries />
               </RouterGuard>
             }
           />
@@ -150,7 +150,7 @@ export default function App() {
             path="/profile"
             element={
               <RouterGuard>
-                <My_Profile userData={userData} />
+                <MyProfile userData={userData} />
               </RouterGuard>
             }
           />

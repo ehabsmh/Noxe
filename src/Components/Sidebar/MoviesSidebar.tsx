@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import style from "../Sidebar/sidebar.module.css";
-import { NoxeContext } from "./../Context/Store";
+import { NoxeContext } from "../Context/Store";
 
 interface props {
   getMovieGenres: (
@@ -11,7 +11,7 @@ interface props {
   getMovieCategories: (category: any, callback: Function, type: string) => void;
 }
 
-const Movies_Sidebar: React.FC<props> = ({
+const MoviesSidebar: React.FC<props> = ({
   getMovieGenres,
   getMovieCategories,
 }) => {
@@ -105,4 +105,4 @@ const Movies_Sidebar: React.FC<props> = ({
     </nav>
   );
 };
-export default Movies_Sidebar;
+export default MoviesSidebar;

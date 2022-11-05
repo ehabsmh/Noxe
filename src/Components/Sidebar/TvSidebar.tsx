@@ -11,7 +11,7 @@ interface props {
   getTvCategories: (category: string, callback: Function, type: string) => void;
 }
 
-const Tv_Sidebar: React.FC<props> = ({ getTvGenres, getTvCategories }) => {
+const TvSidebar: React.FC<props> = ({ getTvGenres, getTvCategories }) => {
   const context = useContext(NoxeContext);
   // const toggler = useRef<HTMLElement | any>(null);
   const btnToggle = useRef<HTMLButtonElement>(null);
@@ -102,4 +102,4 @@ const Tv_Sidebar: React.FC<props> = ({ getTvGenres, getTvCategories }) => {
     </nav>
   );
 };
-export default Tv_Sidebar;
+export default TvSidebar;

@@ -13,7 +13,7 @@ interface MovieDetailsType {
   genres: string | any;
 }
 
-export default function Movie_details() {
+export default function MovieDetails() {
   // a param that getting the id url after the component url .
   const params = useParams();
 
@@ -40,7 +40,7 @@ export default function Movie_details() {
   return (
     <>
       {movieDetails ? (
-        <section>
+        <section id="movieDetails">
           <div className="cover-image">
             <div className="layer">
               <img
