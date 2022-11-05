@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { createContext, useEffect, useRef, useState } from "react";
 
 interface NoxeContextProviderProps {
@@ -27,6 +27,7 @@ interface MovModel {
   vote_average: number;
   original_language: string;
   overview: string;
+  bookmarked?: boolean;
   genres?: string | any;
   profile_path?: string;
 }
@@ -72,10 +73,19 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
     callback: Function,
     type: string
   ) {
-    const { data } = await axios.get(
+    let { data } = await axios.get<any, AxiosResponse<{results: MovModel[]}, any>, any>(
       `https://api.themoviedb.org/3/discover/${type}?api_key=f1aca93e54807386df3f6972a5c33b50&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currPage}`
     );
-    callback(data.results);
+
+    const parsedFavList: MovModel[] = JSON.parse((localStorage.getItem("bookMarkList") || "[]"))
+
+    const mappedMovies = data.results.map(movie => {
+      const isMovieBookmarked: boolean = Boolean(parsedFavList.find(favMovie => favMovie.id === movie.id))
+      movie.bookmarked = isMovieBookmarked
+
+      return movie
+    })
+    callback(mappedMovies);
     setCurrPage(currPage);
   };
 
@@ -147,10 +157,18 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
   const [favoriteList, setFavoriteList] = useState<MovModel[] | any>(null);
 
   const addToFavorite = (movie: MovModel) => {
-    favoriteList.push(movie);
-    const favoriteSet = new Set(favoriteList);
-    const favoriteUnSet = [...favoriteSet];
-    localStorage.setItem("bookMarkList", JSON.stringify(favoriteUnSet));
+
+    const favList: string | null = localStorage.getItem('bookMarkList')
+
+    let parsedFavList: MovModel[] = favList ? JSON.parse(favList) : []
+
+    const isMovieAlreadyAdded: boolean = Boolean(parsedFavList.find(mov => mov.id === movie.id))
+
+    parsedFavList = isMovieAlreadyAdded ? parsedFavList : [...parsedFavList, movie];
+
+    localStorage.setItem("bookMarkList", JSON.stringify(parsedFavList));
+    setFavoriteList(parsedFavList)
+    // Update the current movies array with the new bookmarked movies => bookmarked
   };
 
   // navbar ref for observing

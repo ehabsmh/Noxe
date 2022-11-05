@@ -11,6 +11,7 @@ interface MovModel {
   release_date: string;
   vote_average: number;
   original_language: string;
+  bookmarked?: boolean;
   overview: string;
   genres: string | any;
 }
@@ -31,8 +32,16 @@ const Movies = () => {
       context.setFavoriteList(
         JSON.parse(localStorage.getItem("bookMarkList") as string)
       );
+
+    const parsedFavList: MovModel[] = JSON.parse(localStorage.getItem("bookMarkList") as string)
+
+
+    // update movies list parsedFavList
+
     context.getData(context.currPage, context.setAllMovies, "movie");
   }, []);
+
+  debugger
 
   return (
     <>
@@ -98,7 +107,7 @@ const Movies = () => {
                       <div
                         className="bookmark position-absolute start-0 bottom-0 bg-dark d-flex justify-content-center align-items-center"
                         onClick={(e: any) => {
-                          if (e.target.classList.contains("fa-bookmark")) {
+                          if (movie.bookmarked) {
                             e.target.classList.replace(
                               "fa-regular",
                               "fa-solid"
@@ -109,7 +118,7 @@ const Movies = () => {
                         }}
                       >
                         <i
-                          className="fa-regular fa-bookmark fa-2x"
+                          className={`${movie.bookmarked ? "fa-solid" : "fa-regular"} fa-bookmark fa-2x`}
                           ref={bookMarkIcon}
                         ></i>
                       </div>

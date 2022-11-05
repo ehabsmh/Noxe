@@ -28,7 +28,6 @@ export default function App() {
     const encodedToken = localStorage.getItem("token");
     const decodedToken: any = jwt_decode(encodedToken || "");
     setUserData(decodedToken);
-    console.log(userData);
   };
 
   useEffect(() => {
