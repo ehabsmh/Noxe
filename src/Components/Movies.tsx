@@ -26,22 +26,9 @@ const Movies = () => {
   if he has then get the saved data for him, if not then create a new array to start saving the data .
   */
   useEffect(() => {
-    if (localStorage.getItem("bookMarkList") === null)
-      context.setFavoriteList([]);
-    else
-      context.setFavoriteList(
-        JSON.parse(localStorage.getItem("bookMarkList") as string)
-      );
-
-    const parsedFavList: MovModel[] = JSON.parse(localStorage.getItem("bookMarkList") as string)
-
-
-    // update movies list parsedFavList
-
     context.getData(context.currPage, context.setAllMovies, "movie");
   }, []);
 
-  debugger
 
   return (
     <>
