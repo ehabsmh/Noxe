@@ -20,7 +20,6 @@ const Movies = () => {
   const context = useContext(NoxeContext);
 
   // bookmark icon Ref
-  const bookMarkIcon = useRef<HTMLElement | null>(null);
 
   /*  component did mount here is to check if the user already has a localStorage or not, 
   if he has then get the saved data for him, if not then create a new array to start saving the data .
@@ -28,7 +27,6 @@ const Movies = () => {
   useEffect(() => {
     context.getData(context.currPage, context.setAllMovies, "movie");
   }, []);
-
 
   return (
     <>
@@ -91,22 +89,14 @@ const Movies = () => {
                 {context.allMovies.map((movie: MovModel, i: number) => (
                   <div key={i} className="movie col-md-2">
                     <div className="position-relative">
-                      <div
-                        className="bookmark position-absolute start-0 bottom-0 bg-dark d-flex justify-content-center align-items-center"
-                        onClick={(e: any) => {
-                          if (movie.bookmarked) {
-                            e.target.classList.replace(
-                              "fa-regular",
-                              "fa-solid"
-                            );
-                            e.target.classList.add("text-warning");
-                          }
-                          context.addToFavorite(movie);
-                        }}
-                      >
+                      <div className="bookmark position-absolute start-0 bottom-0 bg-dark d-flex justify-content-center align-items-center">
                         <i
-                          className={`${movie.bookmarked ? "fa-solid" : "fa-regular"} fa-bookmark fa-2x`}
-                          ref={bookMarkIcon}
+                          onClick={() => context.addToFavorite(movie)}
+                          className={`${
+                            movie.bookmarked
+                              ? "fa-solid text-warning"
+                              : "fa-regular"
+                          } fa-bookmark fa-2x`}
                         ></i>
                       </div>
                       {movie.vote_average < 6 ? (

@@ -76,7 +76,8 @@ a:hover {
 }
 
 // MovieDetails Component
-#movieDetails {
+#movieDetails,
+#tvDetails {
   .cover-image {
     position: relative;
 
@@ -96,9 +97,6 @@ a:hover {
         rgb(20, 20, 20, 0.9) 100%
       );
     }
-    .backdrop {
-      max-height: 70vh;
-    }
   }
   .movie-details {
     position: absolute;
@@ -106,6 +104,9 @@ a:hover {
     .poster-path {
       max-height: 320px;
     }
+  }
+  .backdrop {
+    max-height: 70vh;
   }
 }
 

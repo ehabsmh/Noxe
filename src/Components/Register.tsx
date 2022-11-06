@@ -91,7 +91,6 @@ const Register = () => {
       .extract("first_name");
 
     const result = schema.validate(fNameInput.current?.value);
-    console.log(result);
 
     if (result.error) {
       fNameInput.current?.classList.add("is-invalid");
@@ -119,11 +118,10 @@ const Register = () => {
       lNameInput.current?.classList.add("is-invalid");
       setLNameMsg("Last name must be at least 2 chars and maximum 10 chars");
       return result;
-    } else {
-      lNameInput.current?.classList.replace("is-invalid", "is-valid");
-      setLNameMsg("");
-      return result;
     }
+    lNameInput.current?.classList.replace("is-invalid", "is-valid");
+    setLNameMsg("");
+    return result;
   };
 
   const emailValidation = function () {

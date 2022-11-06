@@ -9,13 +9,12 @@ interface Props {
 const MyProfile: React.FC<Props> = ({ userData }) => {
   const context = useContext(NoxeContext);
 
+  const bookmarkList = localStorage.getItem("bookmarkList");
+
   useEffect(() => {
-    if (localStorage.getItem("bookMarkList") === null)
-      context.setFavoriteList([]);
-    else
-      context.setFavoriteList(
-        JSON.parse(localStorage.getItem("bookMarkList") as any)
-      );
+    bookmarkList
+      ? context.setFavoriteList(JSON.parse(bookmarkList))
+      : context.setFavoriteList([]);
   }, []);
 
   return (
@@ -35,15 +34,18 @@ const MyProfile: React.FC<Props> = ({ userData }) => {
         <div className="row gy-5">
           {context.favoriteList?.map((movie: any, i: number) => (
             <div key={i} className="movie col-md-2">
-              <Link to={`/movie-details/${movie.id}`}>
+              <Link
+                to={`${movie.name ? "/tv-details/" : "/movie-details/"}${
+                  movie.id
+                }`}
+              >
                 <img
                   src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
                   alt=""
                   className="w-100"
                 />
               </Link>
-              <p>{movie.title}</p>
-              <p>{movie.release_date}</p>
+              <p>{movie.title || movie.name}</p>
             </div>
           ))}
         </div>

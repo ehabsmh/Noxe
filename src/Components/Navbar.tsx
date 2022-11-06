@@ -66,20 +66,6 @@ const Navbar: React.FC<Props> = ({ userData, logout }) => {
                       Movie of the day
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" aria-current="page" to={"about"}>
-                      About
-                    </Link>
-                  </li>
-                  <li className="nav-item mb-3 mb-lg-0">
-                    <Link
-                      className="nav-link "
-                      aria-current="page"
-                      to={"networks"}
-                    >
-                      Networks
-                    </Link>
-                  </li>
                 </>
               ) : (
                 ""

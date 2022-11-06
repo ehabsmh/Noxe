@@ -45,7 +45,7 @@ export default function MovieDetails() {
             <div className="layer">
               <img
                 src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
-                alt=""
+                alt="Movie backdrop"
                 className="w-100 backdrop"
               />
               <div className="movie-details">
@@ -54,7 +54,7 @@ export default function MovieDetails() {
                     <div className="col-md-2">
                       <img
                         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-                        alt=""
+                        alt="Movie poster"
                         className="w-100 rounded-3 poster-path"
                       />
                     </div>

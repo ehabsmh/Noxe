@@ -3,8 +3,6 @@ import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import Movies from "./Components/Movies";
 import Motd from "./Components/Motd";
-import About from "./Components/About";
-import Networks from "./Components/Networks";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import { useNavigate, Navigate, Route, Routes } from "react-router-dom";
@@ -125,22 +123,6 @@ export default function App() {
             element={
               <RouterGuard>
                 <Motd />
-              </RouterGuard>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <RouterGuard>
-                <About />
-              </RouterGuard>
-            }
-          />
-          <Route
-            path="/networks"
-            element={
-              <RouterGuard>
-                <Networks />
               </RouterGuard>
             }
           />

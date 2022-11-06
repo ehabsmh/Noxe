@@ -36,7 +36,7 @@ export default function TvDetails() {
   return (
     <>
       {tvDetails ? (
-        <section>
+        <section id="tvDetails">
           <div className="cover-image">
             <div className="layer">
               <img
