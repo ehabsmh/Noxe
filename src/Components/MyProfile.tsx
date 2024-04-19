@@ -22,10 +22,9 @@ const MyProfile: React.FC<Props> = ({ userData }) => {
       <div className="container-custom">
         {userData ? (
           <div>
-            <p>ID: {userData._id}</p>
-            <p>First name: {userData.first_name}</p>
-            <p>Last name: {userData.last_name}</p>
-            <p>email: {userData.email}</p>
+            <p>ID: {userData.id}</p>
+            <p>Name: {userData.name}</p>
+            <p>role: {userData.role}</p>
           </div>
         ) : (
           ""
