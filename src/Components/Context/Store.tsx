@@ -93,7 +93,6 @@ export const NoxeContextProvider = ({ children }: NoxeContextProviderProps) => {
       movie.bookmarked = isMovieBookmarked;
       return movie;
     });
-    console.log(mappedMovies);
 
     callback(mappedMovies);
     setCurrPage(currPage);

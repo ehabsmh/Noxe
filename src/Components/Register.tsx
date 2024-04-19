@@ -4,21 +4,21 @@ import joi from "joi";
 import { useNavigate } from "react-router-dom";
 
 interface userTypes {
-  first_name: string;
-  last_name: string;
+  name: string;
   email: string;
   password: string;
-  age: number;
+  rePassword: string;
+  phone: string;
 }
 
 const Register = () => {
   // User Object to collect user data inside it .
   const [user, setUser] = useState<userTypes>({
-    first_name: "",
-    last_name: "",
+    name: "",
     email: "",
     password: "",
-    age: 0,
+    rePassword: "",
+    phone: ""
   });
 
   // email address already exist message .
@@ -26,12 +26,10 @@ const Register = () => {
 
   // Inputs Refs
   const fNameInput = useRef<HTMLInputElement>(null);
-  const lNameInput = useRef<HTMLInputElement>(null);
   const emailInput = useRef<HTMLInputElement>(null);
 
   // validation error msgs
   const [fNameMsg, setFNameMsg] = useState<string>("");
-  const [lNameMsg, setLNameMsg] = useState<string>("");
   const [emailMsg, setEmailMsg] = useState<string>("");
 
   // loading icons
@@ -51,24 +49,21 @@ const Register = () => {
   ): Promise<void> {
     e.preventDefault();
     isLoading(true);
-    const fNameValidated = fNameValidation();
-
-    const lNameValidated = lNameValidation();
-
-    const emailValidated = emailValidation();
+    const nameValidationRes = nameValidation();
+    const emailValidationRes = emailValidation();
 
     if (
-      !fNameValidated.error &&
-      !lNameValidated.error &&
-      !emailValidated.error
+      !nameValidationRes.error &&
+      !emailValidationRes.error
     ) {
       const { data } = await axios.post(
-        `https://route-egypt-api.herokuapp.com/signup`,
+        "https://ecommerce.routemisr.com/api/v1/auth/signup",
         user
       );
 
       if (data.message === "success") {
         // redirect to login page
+        
         isLoading(false);
         navigate("/login");
       } else {
@@ -83,12 +78,12 @@ const Register = () => {
 
   // Validation functions .
 
-  const fNameValidation = function () {
+  const nameValidation = function () {
     const schema = joi
       .object({
-        first_name: joi.string().alphanum().min(3).max(10).required(),
+        name: joi.string().alphanum().min(3).max(10).required(),
       })
-      .extract("first_name");
+      .extract("name");
 
     const result = schema.validate(fNameInput.current?.value);
 
@@ -105,24 +100,6 @@ const Register = () => {
     }
   };
 
-  const lNameValidation = function () {
-    const schema = joi
-      .object({
-        last_name: joi.string().alphanum().min(2).max(10).required(),
-      })
-      .extract("last_name");
-
-    const result = schema.validate(lNameInput.current?.value);
-
-    if (result.error) {
-      lNameInput.current?.classList.add("is-invalid");
-      setLNameMsg("Last name must be at least 2 chars and maximum 10 chars");
-      return result;
-    }
-    lNameInput.current?.classList.replace("is-invalid", "is-valid");
-    setLNameMsg("");
-    return result;
-  };
 
   const emailValidation = function () {
     const schema = joi
@@ -134,7 +111,6 @@ const Register = () => {
       })
       .extract("email");
     const result = schema.validate(emailInput.current?.value);
-    console.log(result);
 
     if (result.error) {
       emailInput.current?.classList.add("is-invalid");
@@ -153,47 +129,19 @@ const Register = () => {
       <form onSubmit={sendUserData} className=" form-box p-4 w-75 m-auto">
         <p className="text-center text-danger">{emailExistenceMsg}</p>
         <div className="mb-3">
-          <label htmlFor="first_name" className="form-label">
-            First Name
+          <label htmlFor="name" className="form-label">
+            Name
           </label>
           <input
             onChange={userCreator}
-            onInput={fNameValidation}
+            onInput={nameValidation}
             ref={fNameInput}
             type="text"
             className="form-control"
-            id="first_name"
-            name="first_name"
+            id="name"
+            name="name"
           />
           <p className="text-danger mt-2">{fNameMsg}</p>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="last_name" className="form-label">
-            Last Name
-          </label>
-          <input
-            onChange={userCreator}
-            onInput={lNameValidation}
-            ref={lNameInput}
-            type="text"
-            className="form-control"
-            id="last_name"
-            name="last_name"
-          />
-          <p className="text-danger mt-2">{lNameMsg}</p>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="age" className="form-label">
-            Age
-          </label>
-          <input
-            onChange={userCreator}
-            type="number"
-            className="form-control"
-            max={80}
-            id="age"
-            name="age"
-          />
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -220,7 +168,32 @@ const Register = () => {
             className="form-control"
             id="password"
             name="password"
-            placeholder="Form is Accepts any password 😊"
+            placeholder="Form Accepts any password"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="rePassword" className="form-label">
+            Confirm Password
+          </label>
+          <input
+            onChange={userCreator}
+            type="password"
+            className="form-control"
+            id="rePassword"
+            name="rePassword"
+            placeholder="Form Accepts any password"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="phone" className="form-label">
+            Phone Number
+          </label>
+          <input
+            onChange={userCreator}
+            type="text"
+            className="form-control"
+            id="phone"
+            name="phone"
           />
         </div>
         {loading ? (

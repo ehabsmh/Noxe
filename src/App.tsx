@@ -17,14 +17,22 @@ interface Props {
   children: JSX.Element;
 }
 
+interface decodedTokenInterface {
+  exp: number;
+  iat: number;
+  id: string;
+  name: string;
+  role: string;
+};
+
 export default function App() {
   const [userData, setUserData] = useState<any>(null);
   const navigate = useNavigate();
 
   // Transforming the encoded token to decoded token
   const getUserData = (): void => {
-    const encodedToken = localStorage.getItem("token");
-    const decodedToken: any = jwt_decode(encodedToken || "");
+    const encodedToken: string | null = localStorage.getItem("token");
+    const decodedToken: decodedTokenInterface = jwt_decode(encodedToken || "");
     setUserData(decodedToken);
   };
 

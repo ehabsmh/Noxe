@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { NoxeContext } from "./Context/Store";
 import MoviesSidebar from "./Sidebar/MoviesSidebar";
@@ -26,7 +26,7 @@ const Movies = () => {
   */
   useEffect(() => {
     context.getData(context.currPage, context.setAllMovies, "movie");
-  }, []);
+  });
 
   return (
     <>
